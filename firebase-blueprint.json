@@ -1,0 +1,38 @@
+{
+  "entities": {
+    "Story": {
+      "title": "Story",
+      "description": "A generated or converted story saved in the system.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "pages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "text": { "type": "string" },
+              "illustrationPrompt": { "type": "string" },
+              "characterDescription": { "type": "string" },
+              "sceneDescription": { "type": "string" },
+              "keyPoints": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": ["text", "illustrationPrompt", "characterDescription", "sceneDescription"]
+          }
+        },
+        "authorId": { "type": "string" },
+        "type": { "type": "string", "enum": ["kid-story", "visual-novel", "training-video"] },
+        "theme": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "pages", "type", "createdAt"]
+    }
+  },
+  "firestore": {
+    "stories": {
+      "schema": "Story",
+      "description": "Collection of all stories created by users."
+    }
+  }
+}

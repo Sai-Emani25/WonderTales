@@ -1,0 +1,5 @@
+{
+  "name": "WonderTales",
+  "description": "An interactive AI storybook and visual novel creator with voice narration and consistent AI illustrations.",
+  "requestFramePermissions": ["microphone"]
+}
