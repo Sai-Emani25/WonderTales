@@ -33,8 +33,8 @@ const STORY_TYPE_CONFIG = {
   'visual-novel': {
     card: "aspect-[16/9] bg-black border-4 border-indigo-950 rounded-xl",
     layout: "h-full w-full relative",
-    visual: "absolute inset-0 w-full h-full flex items-center justify-center",
-    image: "w-full h-full brightness-75 hover:scale-110 object-cover",
+    visual: "absolute inset-0 w-full h-full flex items-end justify-center",
+    image: "w-full h-full brightness-75 hover:scale-105 object-cover object-bottom",
     content: "absolute bottom-0 left-0 right-0 p-10 bg-gradient-to-t from-black via-black/80 to-transparent text-white min-h-[40%] flex flex-col justify-center",
     text: "text-2xl md:text-3xl font-medium vn-text-shadow italic",
     audioBtn: "bg-white/10 backdrop-blur-xl border border-white/20 hover:bg-white/30",

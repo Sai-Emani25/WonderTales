@@ -34,7 +34,7 @@ export async function generateStory(theme: string, type: 'kid-story' | 'visual-n
        The style should be "colorful children's book illustration, whimsical and soft".`;
 
   const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
+    model: "gemini-3-flash-preview",
     contents: prompt,
     config: {
       responseMimeType: "application/json",
@@ -73,7 +73,7 @@ export async function generateStory(theme: string, type: 'kid-story' | 'visual-n
 
 export async function convertToVisualNovel(text: string): Promise<Story> {
   const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
+    model: "gemini-3-flash-preview",
     contents: `Convert the following book text/content into a 5-page visual novel script. 
     Focus on the most cinematic scenes. 
     Original Text: """${text}"""
@@ -109,7 +109,7 @@ export async function convertToVisualNovel(text: string): Promise<Story> {
 
 export async function generateTrainingModule(guide: string): Promise<Story> {
   const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
+    model: "gemini-3-flash-preview",
     contents: `Transform the following training information into a 10-segment professional training video script. 
     Information: """${guide}"""
     
@@ -177,7 +177,7 @@ export async function generateIllustration(prompt: string, style: string, previo
   }
 
   const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
+    model: "gemini-2.5-flash-image",
     contents: { parts },
     config: {
       imageConfig: {
@@ -186,9 +186,10 @@ export async function generateIllustration(prompt: string, style: string, previo
     },
   });
 
-  const base64 = response.candidates?.[0]?.content?.parts?.find(p => p.inlineData)?.inlineData?.data;
-  if (base64) {
-    return `data:image/png;base64,${base64}`;
+  for (const part of response.candidates?.[0]?.content?.parts || []) {
+    if (part.inlineData) {
+      return `data:image/png;base64,${part.inlineData.data}`;
+    }
   }
 
   throw new Error("No image generated");

@@ -56,7 +56,7 @@ export default function Home() {
     if (!theme.trim()) return;
     setLoading(true);
     try {
-      const s = await generateStory(theme, genType as any);
+      const s = await generateStory(theme, genType);
       setStory(s);
       if (user) await saveStory(s);
     } catch (e) {
